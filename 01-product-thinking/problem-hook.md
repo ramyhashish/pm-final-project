@@ -9,5 +9,5 @@
 
 ## Cold-read your own hook
 - **Is the business risk high enough to justify a new initiative, a high-stakes threat, or a minor inconvenience?:** a high-stakes threat
-- **Is the moment of misery a systemic problem or just an edge case?:** moment of misery
+- **Is the moment of misery a systemic problem or just an edge case?:** systemic problem
 - **Does the value proposition actually remove the obstacle you identified, or is it a generic feature?:** remove the obstacle I identified
