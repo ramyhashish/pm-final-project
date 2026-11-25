@@ -1,23 +1,42 @@
-# Roadmap, PRD & Prototype
+# Feature Roadmap, Module 4 · RouteLogic Velocity
 
-> **Module 4 · ★ Deliverable 4.** Repo file `04-roadmap/roadmap-prd-prototype.md` — part of your submission.
-> Do the lab in the **Module 4 · Exercise 1 Guide** (linked from the Module 4 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Roadmap, PRD & Prototype** slide of your Module 6 final deck. (Your Module 4 · Exercise 2 PRD sprint lands in `prd-and-prototype.md`.)
+**Team:** 2 engineers + 1 designer + 1 CS lead
 
-## High-level product roadmap
+## Strategic anchors
+- **Persona:** A three-year delivery driver who completes dozens of stops a day, often in bad weather with his hands full (UXR-01).
+- **Primary metric:** Log Compliance Checks gap decrease. Avg daily time lost (manual workarounds) decrease.
+- **Moment of misery:** UX/UI makes users life harder rather than easier, a lot of enhancements are needed for quicker actions (marking delivered, start route)
+- **Guardrail:** Live dispatch board feature adoption rate by drivers and coordinators.
 
-_Future direction, key milestones, and phased execution over time._
+## Scoring
+| Feature | Value | Effort | Quadrant | Decision | Rationale |
+|---|---|---|---|---|---|
+| B1 One-Click Compliance Checklist | 5 | 5 | Major Project | Next |  |
+| B2 Smart Daily Report Auto-Fill | 2 | 2 | Fill-In | Later |  |
+| B3 Shift Handoff Wizard | 2 | 5 | Time Sinker | Cut |  |
+| B4 Mobile-First Coordinator Dashboard | 4 | 4 | Major Project | Next |  |
+| B5 Step Progress Indicator | 2 | 2 | Fill-In | Later |  |
+| B6 Driver Alert Notifications | 5 | 2 | Quick Win | Now |  |
+| B7 Contextual AI ETA Display | 1 | 3 | Time Sinker | Cut |  |
+| B8 Fleet Analytics Manager View | 3 | 4 | Time Sinker | Cut |  |
+| B9 Compliance Audit Trail Export | 1 | 3 | Time Sinker | Cut |  |
+| B10 In-App Coordinator Training | 3 | 5 | Time Sinker | Cut |  |
 
-_____
+## Roadmap
+### NOW, Pilot (4 weeks, 3 accounts)
+- **B6 Driver Alert Notifications**, _rationale_
 
-## PRD snippets
+### NEXT, GA Release (weeks 5-8)
+- **B1 One-Click Compliance Checklist**, _rationale_
+- **B4 Mobile-First Coordinator Dashboard**, _rationale_
 
-_The key elements of your simplified PRD._
+### LATER, backlog
+- **B2 Smart Daily Report Auto-Fill**, _rationale_
+- **B5 Step Progress Indicator**, _rationale_
 
-_____
-
-## Wireframes / prototype
-
-_A visual or interactive model of your proposed solution._
-
-_[screenshot or link to your prototype]_
+### ✂ Cut List
+- **B3 Shift Handoff Wizard**, _rationale_
+- **B7 Contextual AI ETA Display**, _rationale_
+- **B8 Fleet Analytics Manager View**, _rationale_
+- **B9 Compliance Audit Trail Export**, _rationale_
+- **B10 In-App Coordinator Training**, _rationale_

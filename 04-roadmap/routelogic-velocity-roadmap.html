@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RouteLogic Velocity Roadmap</title>
+<style>
+:root{
+  --bg:#eef1f4;--panel:#ffffff;--ink:#14202b;--mute:#566574;--line:#d5dce3;
+  --now:#c48f00;--next:#1f7a8c;--later:#6b7a8a;
+  --qw-bg:#d9f2e3;--qw-fg:#10603a;--mp-bg:#dbe7fb;--mp-fg:#1b4a9a;
+  --fi-bg:#e6e9ed;--fi-fg:#46525e;--ts-bg:#fbe1da;--ts-fg:#9a2f14;
+  --focus:#1b4a9a;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0f1820;--panel:#18242f;--ink:#e8eef3;--mute:#9aabb9;--line:#2b3b49;
+    --now:#f2b705;--next:#4fb3c6;--later:#8d9db0;
+    --qw-bg:#143a28;--qw-fg:#7fe0aa;--mp-bg:#16305c;--mp-fg:#9fc0ff;
+    --fi-bg:#263340;--fi-fg:#b6c3cf;--ts-bg:#4a2018;--ts-fg:#ffab94;
+    --focus:#9fc0ff;
+  }
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;padding:40px 24px 64px;color:var(--ink);background:var(--bg);
+  font:16px/1.5 "Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:clamp(2rem,4vw,3rem);line-height:1.05;letter-spacing:-.025em;margin:0 0 8px;font-weight:800}
+.sub{margin:0 0 24px;color:var(--mute);max-width:62ch}
+dl.anchors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 28px}
+dl.anchors div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+dl.anchors dt{font-weight:700;font-size:.9rem;margin-bottom:2px}
+dl.anchors dd{margin:0;color:var(--mute);font-size:.9rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 28px}
+.filters span{font-size:.9rem;color:var(--mute);margin-right:4px}
+.chip{font:inherit;font-size:.9rem;padding:6px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.lane{--c:var(--now)}
+.lane.next{--c:var(--next)}
+.lane.later{--c:var(--later)}
+.lane-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.lane-head h2{margin:0;font-size:1.5rem;letter-spacing:-.01em}
+.lane-head p{margin:0;color:var(--mute);font-size:.9rem}
+.stops{border-left:3px dashed var(--c);margin-left:7px;padding-left:20px;display:grid;gap:14px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;transition:opacity .2s}
+.stops .card::before{content:"";position:absolute;left:-30px;top:20px;width:13px;height:13px;
+  border-radius:50%;background:var(--bg);border:3px solid var(--c)}
+.card.dim{opacity:.25}
+.card-top{all:unset;box-sizing:border-box;display:flex;gap:10px;align-items:flex-start;width:100%;cursor:pointer}
+.card-top:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:6px}
+.id{font-weight:800;font-size:.85rem;color:var(--mute);padding-top:3px;min-width:26px}
+.name{flex:1;font-weight:700;font-size:1.05rem;line-height:1.25}
+.badge{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.qw{background:var(--qw-bg);color:var(--qw-fg)}
+.mp{background:var(--mp-bg);color:var(--mp-fg)}
+.fi{background:var(--fi-bg);color:var(--fi-fg)}
+.ts{background:var(--ts-bg);color:var(--ts-fg)}
+.why{margin:10px 0 0 36px;color:var(--mute);font-size:.95rem}
+.more{margin:12px 0 0 36px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:8px;font-size:.9rem}
+.more[hidden]{display:none}
+.meter{display:flex;align-items:center;gap:8px}
+.meter b{min-width:50px;font-weight:600}
+.meter i{display:inline-block;width:18px;height:8px;border-radius:2px;background:var(--line)}
+.meter i.on{background:var(--ink)}
+.anchor{color:var(--mute)}
+.cut{margin-top:48px}
+.cut h2{margin:0 0 4px;font-size:1.5rem}
+.cut>p{margin:0 0 16px;color:var(--mute)}
+.cut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.cut .card{border-style:dashed}
+@media (max-width:900px){.lanes{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>RouteLogic Velocity</h1>
+  <p class="sub">Roadmap for removing the friction in everyday driver actions. Team: 2 engineers, 1 designer, 1 CS lead.</p>
+
+  <dl class="anchors">
+    <div><dt>Persona</dt><dd>Diego, a three-year delivery driver who works dozens of stops a day with his hands full.</dd></div>
+    <div><dt>Primary metrics</dt><dd>The compliance-check time gap and daily time lost to manual workarounds both go down.</dd></div>
+    <div><dt>Guardrail</dt><dd>Live Dispatch Board adoption by drivers and coordinators does not drop.</dd></div>
+  </dl>
+
+  <div class="filters" role="group" aria-label="Filter by quadrant">
+    <span>Highlight:</span>
+  </div>
+
+  <div class="lanes" id="lanes"></div>
+
+  <section class="cut" aria-labelledby="cut-title">
+    <h2 id="cut-title">Cut list</h2>
+    <p>Not scheduled. Each fails the persona test or competes with the pilot for the same two engineers.</p>
+    <div class="cut-grid" id="cut"></div>
+  </section>
+</div>
+
+<script>
+const QCLASS = {"Quick Win":"qw","Major Project":"mp","Fill-In":"fi","Time Sinker":"ts"};
+
+const LANES = [
+  {key:"now", title:"Now", sub:"Pilot, 4 weeks, 3 accounts", items:[
+    {id:"B6", name:"Driver Alert Notifications", q:"Quick Win", v:5, e:3,
+     why:"The only item that touches Diego’s goal: it ends the 8–15 minute route-change lag (BUG-2044).",
+     anchor:"Persona goal and guardrail. Scope to route changes only, and confirm with engineering that the lag is not backend-side."}
+  ]},
+  {key:"next", title:"Next", sub:"GA release, weeks 5–8", items:[
+    {id:"B1", name:"One-Click Compliance Checklist", q:"Quick Win", v:5, e:3,
+     why:"Attacks the largest gap: compliance takes 14.6 minutes against a 3.0 benchmark.",
+     anchor:"Primary metric: compliance-check gap. Use defaults and templates, not ML."},
+    {id:"B4", name:"Mobile-First Coordinator Dashboard", q:"Major Project", v:4, e:5,
+     why:"Closest match for fewer taps, but it is a rebuild. Stage it after the pilot proves B6 and B1.",
+     anchor:"Primary metric: time lost. Risk to the guardrail, since it reshapes the Live Dispatch Board."}
+  ]},
+  {key:"later", title:"Later", sub:"Backlog", items:[
+    {id:"B2", name:"Smart Daily Report Auto-Fill", q:"Time Sinker", v:3, e:4,
+     why:"The gap is real (+6.7 minutes), but AI features score 2.1–2.4 CSAT. Revisit once B1 proves pre-fill works.",
+     anchor:"Primary metric: time lost. Drivers barely use reporting (3% adoption)."},
+    {id:"B5", name:"Step Progress Indicator", q:"Fill-In", v:2, e:1,
+     why:"Cheap, but it removes no taps or minutes. Add only if it does not crowd core actions.",
+     anchor:"No anchor metric moves. Clarity only."}
+  ]}
+];
+
+const CUT = [
+  {id:"B3", name:"Shift Handoff Wizard", q:"Fill-In", v:3, e:3,
+   why:"Real +6.8 minute gap, but a wizard adds screens, against the goal of stripping noise.",
+   anchor:"Touches time lost, but adds steps."},
+  {id:"B7", name:"Contextual AI ETA Display", q:"Fill-In", v:1, e:2,
+   why:"11% driver adoption and 2.1 CSAT. It adds clutter where core actions are already buried.",
+   anchor:"No anchor metric moves."},
+  {id:"B8", name:"Fleet Analytics Manager View", q:"Time Sinker", v:1, e:5,
+   why:"Managers already rate Reporting 4.5. No effect on Diego or on time lost.",
+   anchor:"No anchor metric moves."},
+  {id:"B9", name:"Compliance Audit Trail Export", q:"Fill-In", v:2, e:2,
+   why:"Serves auditors and managers, not the 14.6-minute coordinator compliance step.",
+   anchor:"No anchor metric moves."},
+  {id:"B10", name:"In-App Coordinator Training", q:"Fill-In", v:2, e:2,
+   why:"Teaches users to work around friction instead of removing it.",
+   anchor:"No anchor metric moves."}
+];
+
+function meter(label, n){
+  let bars = "";
+  for(let i=1;i<=5;i++) bars += '<i class="'+(i<=n?'on':'')+'"></i>';
+  return '<div class="meter"><b>'+label+'</b>'+bars+'<span>'+n+' of 5</span></div>';
+}
+
+function buildCard(f){
+  const a = document.createElement("article");
+  a.className = "card";
+  a.dataset.q = f.q;
+  a.innerHTML =
+    '<button class="card-top" type="button" aria-expanded="false">' +
+      '<span class="id">'+f.id+'</span>' +
+      '<span class="name">'+f.name+'</span>' +
+      '<span class="badge '+QCLASS[f.q]+'">'+f.q+'</span>' +
+    '</button>' +
+    '<p class="why">'+f.why+'</p>' +
+    '<div class="more" hidden>' + meter("Value", f.v) + meter("Effort", f.e) +
+      '<div class="anchor">'+f.anchor+'</div></div>';
+  const btn = a.querySelector(".card-top");
+  const more = a.querySelector(".more");
+  btn.addEventListener("click", function(){
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    more.hidden = open;
+  });
+  return a;
+}
+
+const lanesEl = document.getElementById("lanes");
+LANES.forEach(function(l){
+  const sec = document.createElement("section");
+  sec.className = "lane " + l.key;
+  sec.innerHTML = '<div class="lane-head"><h2>'+l.title+'</h2><p>'+l.sub+'</p></div>';
+  const stops = document.createElement("div");
+  stops.className = "stops";
+  l.items.forEach(function(f){ stops.appendChild(buildCard(f)); });
+  sec.appendChild(stops);
+  lanesEl.appendChild(sec);
+});
+const cutEl = document.getElementById("cut");
+CUT.forEach(function(f){ cutEl.appendChild(buildCard(f)); });
+
+const filters = document.querySelector(".filters");
+["All","Quick Win","Major Project","Fill-In","Time Sinker"].forEach(function(name, i){
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip";
+  b.textContent = name;
+  b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+  b.addEventListener("click", function(){
+    filters.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed","false"); });
+    b.setAttribute("aria-pressed","true");
+    document.querySelectorAll(".card").forEach(function(c){
+      c.classList.toggle("dim", name !== "All" && c.dataset.q !== name);
+    });
+  });
+  filters.appendChild(b);
+});
+</script>
+</body>
+</html>
